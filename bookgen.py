@@ -1,8 +1,13 @@
+# Patrick Eddy
+# TCSS 435
+# Programming Assignment 3
+
 from collections import deque
 from random import randint
 import re
 import json
 import os.path
+
 
 class BookGen():
     """Generate books by training with other books."""
