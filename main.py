@@ -28,7 +28,7 @@ def main():
         'melville': ['melville-billy-27.txt'],
         'twain': ['twain-adventures-27.txt']
     }
-    bookgen = BookGen(save_training_data=True, skip_training_if_saved=False)
+    bookgen = BookGen(save_training_data=False, skip_training_if_saved=False)
     train = lambda book: bookgen.train(get_book(book))
 
     print("Training with all books...")
