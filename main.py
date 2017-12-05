@@ -2,17 +2,10 @@
 # TCSS 435
 # Programming Assignment 3
 
-# Steps
-# 1. Read in words, and give them to the trainer
-# 2. Trainer creates a hash table filled with linked lists
-#    where every third node has a freq count.
-# 3. Trainer spits out a new book, and hands it over to readwrite that writes
-#    the new book to a file.
-
 from bookgen import BookGen
 
 def get_book(filename):
-    print("Reading " + str(filename))
+    print("Reading " + str(filename) + "...")
     f = open("books/" + str(filename), "r")
     b = f.read()
     f.close()
@@ -28,16 +21,27 @@ def main():
         'melville': ['melville-billy-27.txt'],
         'twain': ['twain-adventures-27.txt']
     }
-    bookgen = BookGen(save_training_data=True)
+    bookgen = BookGen(save_training_data=True, skip_training_if_saved=True)
 
     print("Training BookGen...")
     train = lambda book: bookgen.train(get_book(book))
-    all_values = lambda bfs: reduce(lambda prev, curr: prev + curr, bfs.values())
-    map(train, all_values(book_files)) # train
+    
+    # train all books
+    # all_values = lambda bfs: reduce(lambda prev, curr: prev + curr, bfs.values())
+    # map(train, all_values(book_files))
+
+    # train some books
+    get_filenames_merged = lambda bfs: reduce(lambda prev, curr: prev + book_files[curr], bfs, [])
+    print(get_filenames_merged(['doyle', 'doyle2']))
+    map(train, get_filenames_merged(['doyle', 'doyle2']))
+
+    # train just one book
+    # map(train, book_files['doyle'])
+    
     print("Training done.")
 
-    print("Generating book...")
-    print(bookgen.generate(1000)) # generate a book
+    print("Generating book...\n")
+    print(bookgen.generate(num_words=1000))
 
 if __name__ == '__main__':
     main()
