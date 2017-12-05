@@ -1,6 +1,6 @@
 # Patrick Eddy
-# TCSS 435
-# Programming Assignment 3
+# Fantastical story generator
+# TCSS 435, University of Washington
 
 from bookgen import BookGen
 from datetime import datetime
