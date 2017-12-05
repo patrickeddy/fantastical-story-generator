@@ -8,13 +8,14 @@ class BookGen():
     """Generate books by training with other books."""
 
     def __init__(self, save_training_data=False, skip_training_if_saved=False):
-        self.main_hash = {}
         self.save_filename = 'training_data.txt'
         self.save_training_data = save_training_data
         self.skip_training = skip_training_if_saved
 
     def train(self, book):
         """Trains the generator using the book string."""
+        self.main_hash = {}
+
         if self.skip_training and os.path.exists(self.save_filename): # skip training if specified
             return
 
